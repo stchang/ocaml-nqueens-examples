@@ -1,4 +1,4 @@
-To run:
+For non-regular ocaml users, here are directions to run the examples:
 
 (* to avoid stack overflow error for nqueens 8 *)
 export OCAMLRUNPARAM=l=100M
