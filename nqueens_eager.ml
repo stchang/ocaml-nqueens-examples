@@ -2,6 +2,7 @@
 
 
 (***** list functions *****)
+(* reimplemented here in anticipation of adding laziness *)
 
 let rec map f = function 
   | [] -> []
@@ -43,8 +44,6 @@ let rec rng n m =
 
 (***** queens conflict predicates *****)
 
-let (!=) x y = not (x=y)
-
 (* true indicates given two queens have no conflict *)
 let isSafe (x1,y1) (x2,y2) = 
   x1 != x2 && y1 != y2
@@ -56,7 +55,7 @@ let isSafe_lst = function
   | [] -> true
   | x::xs -> forall (isSafe x) xs
 
-(* true means no conflicts between queens in given list *)
+(* true means no conflicts between any pair of queens in given list *)
 let isValid lst = forall isSafe_lst (tails lst)
   
   

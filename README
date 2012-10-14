@@ -1,11 +1,14 @@
 For non-regular ocaml users, here are directions to run the examples:
+(tested with OCaml version 4.00.0)
 
-(* to avoid stack overflow error for nqueens 8 *)
+(* to avoid stack overflow error for eager nqueens 8 *)
 export OCAMLRUNPARAM=l=100M
 
 - from cmd line:
 ocamlc nqueens_eager.ml
 time ocamlrun a.out
+
+OR
 
 - to load in interpreter:
 #use "nqueens_eager.ml";;

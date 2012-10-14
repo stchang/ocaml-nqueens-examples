@@ -1,13 +1,14 @@
 (* naively try to make nqueens program (written in lazy style) lazy --
-   ie, just switch to lazy cons *)
+   ie, just switch to lazy lists *)
 
 
-(* lazy list *)
+(* lazy lists *)
 type 'a l_node = Nil | Cons of 'a * 'a l_list
 and 'a l_list = 'a l_node lazy_t
 
 
 (***** list functions *****)
+(* now using lazy lists *)
 
 let rec map f lst = 
   match Lazy.force lst with
@@ -55,8 +56,6 @@ let rec rng n m =
 
 (***** queens conflict predicates *****)
 
-let (!=) x y = not (x=y)
-
 (* true indicates given two queens have no conflict *)
 let isSafe (x1,y1) (x2,y2) = 
   x1 != x2 && y1 != y2
@@ -69,7 +68,7 @@ let isSafe_lst lst =
   | Nil -> true
   | Cons(x,xs) -> forall (isSafe x) xs
 
-(* true means no conflicts between queens in given list *)
+(* true means no conflicts between any pair of queens in given list *)
 let isValid lst = forall isSafe_lst (lazy(tails(lazy lst)))
 
 
